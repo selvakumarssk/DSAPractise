@@ -211,5 +211,245 @@ namespace DSAPractise.LinkedList
             }
             return 1;
         }
+
+        /// <summary>
+        /// Using slow Fast pointer approach, middle node is found
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static ListNode GetMiddleNode(ListNode A)
+        {
+            //List has only two nodes
+            if (A != null && A.next != null && A.next.next == null)
+            {
+                //return the first node as middle 
+                return A;
+            }
+
+            //Slow pointer
+            ListNode sp = A;
+            //Fast Pointer
+            ListNode fp = A;
+            //check fast pointer or next node of fp is null
+            while (fp != null && fp.next != null)
+            {
+                //sp increament by one node
+                sp = sp.next;
+                //fp increament by 2 node
+                fp = fp.next.next;
+            }
+            //return middle node
+            return sp;
+        }
+
+        /// <summary>
+        /// Merge Two Sorted Lists
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public static ListNode MergeTwoLists(ListNode A, ListNode B)
+        {
+            //check if A list is null
+            if (A == null)
+            {
+                //return B list
+                return B;
+            }
+            //check if B list is null
+            if (B == null)
+            {
+                //return A
+                return A;
+            }
+            //Head node of the merged list
+            ListNode Head;
+            //Check if A node is the head of merged list by comparing with B
+            if (A.val <= B.val)
+            {
+                //Make A as head of merged list
+                Head = A;
+                //move to next node
+                A = A.next;
+            }
+            else
+            {
+                //Make B as head of merged list
+                Head = B;
+                //move to next node
+                B = B.next;
+            }
+            //copy head node of merged list
+            ListNode cur = Head;
+            //loop until A and B has values
+            while (A != null && B != null)
+            {
+                //A is less than equal to B
+                if (A.val <= B.val)
+                {
+                    //make A as next of cur
+                    cur.next = A;
+                    //move to next node
+                    A = A.next;
+                }
+                //Value of B is less than A
+                else
+                {
+                    //make B as next of cur
+                    cur.next = B;
+                    //move to next node
+                    B = B.next;
+                }
+                //move to next node
+                cur = cur.next;
+            }
+            //all nodes of List A is processed
+            if (A == null)
+            {
+                //make B as next of cur
+                cur.next = B;
+            }
+            //all nodes of List B is processed
+            else
+            {
+                //make A as next of cur
+                cur.next = A;
+            }
+            //return Head node of merged list
+            return Head;
+        }
+
+        /// <summary>
+        /// Sort a linked list
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static ListNode SortList(ListNode A)
+        {
+            //check list is empty or has one node
+            if (A == null || A.next == null)
+            {
+                //return list
+                return A;
+            }
+            //find the middle node
+            var middle = GetMiddleNode(A);
+            //copy the starting node of the given list to first half list
+            var FHL = A;
+            //copy the next node of the middle node second half list
+            var SHL = middle.next;
+            //remove the next node from middle node to create two half list
+            middle.next = null;
+            //sort the first half
+            FHL = SortList(FHL);
+            //sort the second half
+            SHL = SortList(SHL);
+            //merge the first and second half
+            return MergeTwoLists(FHL, SHL);
+        }
+
+        /// <summary>
+        /// Check Given Linked List has cycle
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns></returns>
+        public static bool Hascycle(ListNode A)
+        {
+            //Copy the Head Noe to Slow Pointer
+            ListNode sP = A;
+            //Copy the Head Noe to Fast Pointer
+            var fP = A;
+            //slow-fast pointer loop
+            while (fP != null && fP.next != null)
+            {
+                // move the SP by one node
+                sP = sP.next;
+                // move the FP by two node
+                fP = fP.next.next;
+                //check SP and FP pointing to same node
+                if (sP == fP)
+                {
+                    //cycle exists 
+                    return true;
+                }
+
+            }
+            //cycle does not exists 
+            return false;
+        }
+
+        /// <summary>
+        /// Get Head Node of the Linked List cycle
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns>Head Node of the Linked List cycle</returns>
+        public static ListNode GetHeadNodeOfTheCycle(ListNode A)
+        {
+            #region Find meeting point of SP and FP
+            ListNode sP = A;
+            ListNode fP = A;
+            while (fP != null && fP.next != null)
+            {
+                // move the SP by one node
+                sP = sP.next;
+                // move the FP by two node
+                fP = fP.next.next;
+                //check SP and FP pointing to same node
+                if (sP == fP)
+                {
+                    //found the meeting node, break the loop
+                    break;
+                }
+            }
+            #endregion
+
+            //Head Node of Cycle
+            ListNode hNCycle = A;
+            while (hNCycle != sP)
+            {
+                hNCycle = hNCycle.next;
+                sP = sP.next;
+            }
+            return hNCycle;
+        }
+
+        /// <summary>
+        /// Break the cycle in the Linked List
+        /// </summary>
+        /// <param name="A"></param>
+        /// <returns>Head Node of the Given Linked List after cycle break</returns>
+        public static ListNode Breakcycle(ListNode A)
+        {
+            #region Find meeting point of SP and FP
+            ListNode sP = A;
+            ListNode fP = A;
+            while (fP != null && fP.next != null)
+            {
+                // move the SP by one node
+                sP = sP.next;
+                // move the FP by two node
+                fP = fP.next.next;
+                //check SP and FP pointing to same node
+                if (sP == fP)
+                {
+                    //found the meeting node, break the loop
+                    break;
+                }
+            }
+            #endregion
+
+            //Head Node of Cycle
+            ListNode hNCycle = A;
+            //Last Node of the cycle
+            ListNode lNCycle = A;
+            while (hNCycle != sP)
+            {
+                lNCycle = sP;
+                hNCycle = hNCycle.next;
+                sP = sP.next;
+            }
+            lNCycle.next = null;
+            return A;
+        }
     }
 }
