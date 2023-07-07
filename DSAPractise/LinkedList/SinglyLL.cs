@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DSAPractise.LinkedList
 {
-    //Definition for singly-linked list.
+    /// <summary>
+    /// Definition for singly-linked list.
+    /// </summary>
     public class ListNode
     {
         public int val;

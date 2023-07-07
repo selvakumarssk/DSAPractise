@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extension\ListExtension.cs" />
+    <Compile Include="LinkedList\DoublyLL.cs" />
     <Compile Include="LinkedList\SinglyLL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
