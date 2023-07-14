@@ -46,44 +46,46 @@ namespace DSAPractise
             //list = SinglyLL.SortList(list);
             #endregion
 
-            #region LRU cache
-            var ss = "50 6 S 6 13 S 15 15 S 3 6 G 4 S 2 6 S 12 13 S 2 9 S 11 9 S 6 7 G 5 G 13 S 10 4 G 6 G 6 G 8 G 14 G 10 S 5 2 G 9 S 4 1 G 11 G 1 S 4 7 S 11 12 S 12 1 S 10 2 G 3 G 10 S 14 13 S 1 10 G 1 G 9 G 1 G 11 G 13 S 14 15 G 11 S 12 14 S 9 2 G 12 G 3 S 3 12 S 8 7 S 14 11 S 7 13 S 9 4 S 11 11 G 6 G 4 S 5 3";
-            ss = "6 1 S 2 1 S 2 2 G 2 S 1 1 S 4 1 G 2";
-            ss = "32 4 S 5 13 S 9 6 S 4 1 G 4 S 6 1 S 8 11 G 13 G 1 S 12 12 G 10 S 15 13 S 2 13 S 7 5 S 10 3 G 6 G 10 S 15 14 S 5 12 G 5 G 7 G 15 G 5 G 6 G 10 S 7 13 G 14 S 8 9 G 4 S 6 11 G 9 S 6 12 G 3";
-            List<string> query = ss.Split(' ').ToList();
+            //#region LRU cache
+            //var ss = "50 6 S 6 13 S 15 15 S 3 6 G 4 S 2 6 S 12 13 S 2 9 S 11 9 S 6 7 G 5 G 13 S 10 4 G 6 G 6 G 8 G 14 G 10 S 5 2 G 9 S 4 1 G 11 G 1 S 4 7 S 11 12 S 12 1 S 10 2 G 3 G 10 S 14 13 S 1 10 G 1 G 9 G 1 G 11 G 13 S 14 15 G 11 S 12 14 S 9 2 G 12 G 3 S 3 12 S 8 7 S 14 11 S 7 13 S 9 4 S 11 11 G 6 G 4 S 5 3";
+            //ss = "6 1 S 2 1 S 2 2 G 2 S 1 1 S 4 1 G 2";
+            //ss = "32 4 S 5 13 S 9 6 S 4 1 G 4 S 6 1 S 8 11 G 13 G 1 S 12 12 G 10 S 15 13 S 2 13 S 7 5 S 10 3 G 6 G 10 S 15 14 S 5 12 G 5 G 7 G 15 G 5 G 6 G 10 S 7 13 G 14 S 8 9 G 4 S 6 11 G 9 S 6 12 G 3";
+            //List<string> query = ss.Split(' ').ToList();
 
-            var cc = ss.Split(' ').Count(x => x == "S" || x == "G");
-            int count = int.Parse(query[0]);
-            int capacity = int.Parse(query[1]);
-            var solution = new Solution(capacity);
-            int queryCount = 1;
-            int i = 2;
-            while (i < query.Count)
-            {
-                if (query[i] == "S")
-                {
-                    solution.set(int.Parse(query[i + 1]), int.Parse(query[i + 2]));
-                    i += 3;
-                }
-                else
-                {
-                    Console.WriteLine(solution.get(int.Parse(query[i + 1])));
-                    i += 2;
-                }
-                queryCount++;
-            }
+            //var cc = ss.Split(' ').Count(x => x == "S" || x == "G");
+            //int count = int.Parse(query[0]);
+            //int capacity = int.Parse(query[1]);
+            //var solution = new Solution(capacity);
+            //int queryCount = 1;
+            //int i = 2;
+            //while (i < query.Count)
+            //{
+            //    if (query[i] == "S")
+            //    {
+            //        solution.set(int.Parse(query[i + 1]), int.Parse(query[i + 2]));
+            //        i += 3;
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine(solution.get(int.Parse(query[i + 1])));
+            //        i += 2;
+            //    }
+            //    queryCount++;
+            //}
 
-            //solution.set(2, 1);
-            //solution.set(2, 2);
-            //Console.WriteLine(solution.get(2));
-            //solution.set(1, 1);
-            //solution.set(4, 1);
-            //Console.WriteLine(solution.get(2));
-            #endregion
+            ////solution.set(2, 1);
+            ////solution.set(2, 2);
+            ////Console.WriteLine(solution.get(2));
+            ////solution.set(1, 1);
+            ////solution.set(4, 1);
+            ////Console.WriteLine(solution.get(2));
+            //#endregion
+
+            var x = DSAPractise.Tree.Tree.BuildTreeFromInorderAndPreorder(new List<int>() { 1,2,3 }, new List<int>() { 2,1,3 });
 
             Console.ReadLine();
         }
 
-      
+
     }
 }
